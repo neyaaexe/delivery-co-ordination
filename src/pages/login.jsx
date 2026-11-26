@@ -19,9 +19,7 @@ function Login()
           <br/><br/>
           <input className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" placeholder="enter your password" required value={password} onChange={(e)=>setPassword(e.target.value)} />
           <br/><br/>
-          <button type='submit'>  
-            LOGIN
-          </button>
+          <button type='submit'>LOGIN</button>
         </form>
     </>
     )
