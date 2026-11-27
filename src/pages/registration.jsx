@@ -1,25 +1,43 @@
 import { BrowserRouter } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerschema } from "../components/FormSchema/registerschema";
 function Registration()
 {
-    const [email, setEmail] = useState(" ")
-    const [password,setPassword] = useState(" ")
-    const formSubmit =(e)=>
+    const navigate = useNavigate();
+    const{register,handleSubmit,formState:{errors}} = useForm({resolver:zodResolver(registerschema) })
+    function onSubmit(data)
     {
-      e.preventDefault()
-      console.log(email,password)
-      console.log("you have successfully registered")
+        console.log(data)
+        alert("register success")
+        navigate("/")
     }
- return(
+    return(
     <>
-     <form onSubmit={formSubmit}>
-      <input type='email' className="bg-fuchsia-600 border-4  border-emerald-500" required placeholder="enter your email" input={email} onChange={(e)=>setEmail(e.target.value)}/>
-      <br/><br/>
-      <input type='password' className="bg-fuchsia-600 border-4 border-emerald-500" required placeholder="enter your password" input={password} onChange={(e)=>setPassword(e.target.value)}/>
-      <br/><br/>
-      <button className="bg-emerald-500 border-8 border-fuchsia-500" > submit </button>
-      <br/><br/>
-      </form>
+         <div className="text-pink-500 font-sans">Registration Page</div>
+         <br/>
+
+         <form onSubmit={handleSubmit(onSubmit)}>
+            <label>username: </label>
+            <input type='text' className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="enter your name" input={email} {...register("name")}/>
+            <p>{errors.name?.message}</p>
+            <br/><br/>
+            <label>email: </label>
+            <input type='email' className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" input={email} placeholder="enter you email" {...register("email")}/>
+            <p>{errors.email?.message}</p>
+            <br/><br/>
+            <label>password: </label>
+            <input type='password' className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required placeholder="enter your password" input={password} {...register("password")}/>
+            <p>{errors.password?.message}</p>
+            <br/><br/>
+            <label>age: </label>
+            <input type='number' className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" required placeholder="enter your age" input={password} {...register("number")}/>
+            <p>{errors.password?.message}</p>
+            <br/><br/>
+            <button className="bg-emerald-500 rounded" > submit </button>
+            <br/><br/>
+         </form>
     </>
  )
 }
