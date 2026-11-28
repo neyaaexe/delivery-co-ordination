@@ -11,7 +11,7 @@ function Registration()
     {
         console.log(data)
         alert("register success")
-        navigate("/",{
+        navigate("/login",{
             state:data
         })
     }

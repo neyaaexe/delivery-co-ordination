@@ -22,24 +22,24 @@ function Login()
         console.log(formdata)
         console.log(registerdata)
         alert("form submitted successfully")
-        if( registerdata.name === logindata.username &&
-        registerdata.email === logindata.email &&
-        registerdata.password === logindata.password
-        && registerdata.role === logindata.role)
+        if( registerdata.name === formdata.username &&
+        registerdata.email === formdata.email &&
+        registerdata.password === formdata.password
+        && registerdata.role === formdata.role)
         {
-            if(logindata.role === "user")
+            if(formdata.role === "user")
             {
                 navigate("/user",
                    { state:formdata}
                 )
             }
-            else if(logindata.role === "delivery-man")
+            else if(formdata.role === "delivery-man")
             {
                 navigate("/delivery",
                    { state:formdata}
                 )
             }
-            else if(logindata.role === "admin")
+            else if(formdata.role === "admin")
             {
                 navigate("/admin",
                    { state:formdata}
